@@ -96,7 +96,7 @@ Error code is 2
 
 ## Example 3 (Adding CSS classes)
 
-You can also use CSS classes. The default log.css file can be found here. You can edit it and add your own classes to your liking, or change the default values if you wish.
+You can also use CSS classes. The default log.css file can be found [here](https://github.com/tralf-strues/log_generator/blob/master/res/log.css). You can edit it and add your own classes to your liking, or change the default values if you wish.
 
 ```c++
 #include "log_generator.h"
