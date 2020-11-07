@@ -1,6 +1,6 @@
 # Simple but convenient log generator
 
-This is a simple html log generator. See *examples* below to better understand how it works or *documentation* where you can find out what each function does.
+This is a simple html log generator. See *examples* below to better understand how it works or [*documentation*](https://tralf-strues.github.io/log_generator/) where you can find out what each function does.
 
 ## Example 1 (Hello World)
 
