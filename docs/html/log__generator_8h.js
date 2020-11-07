@@ -1,0 +1,27 @@
+var log__generator_8h =
+[
+    [ "LG_AddImage", "log__generator_8h.html#aa2d084e5cbb8e3940289829837d26aa5", null ],
+    [ "LG_Close", "log__generator_8h.html#ab18fe00f5e45b162c4a54015cedc145d", null ],
+    [ "LG_Init", "log__generator_8h.html#a85d9ea260bf9910f733970920adbc82a", null ],
+    [ "LG_IsInitialized", "log__generator_8h.html#afeef7acc563ce45fc8b5c3a13705829c", null ],
+    [ "LG_LogMessage", "log__generator_8h.html#a0f255c91a5a5af449ab0204e608e31ca", null ],
+    [ "LG_LogMessage", "log__generator_8h.html#a57d4ec728ce833e3cf8ffa5d18c9d16d", null ],
+    [ "LG_Write", "log__generator_8h.html#a11c5f545db217c90a182eef67a43d985", null ],
+    [ "LG_Write", "log__generator_8h.html#a5f0573d04db2272267ad370171453dbe", null ],
+    [ "LG_Write", "log__generator_8h.html#a08c4da4a2e25477c72560ab61a95e3a9", null ],
+    [ "LG_WriteMessageEnd", "log__generator_8h.html#a0215471dc6d500d6a06790ad0dde81db", null ],
+    [ "LG_WriteMessageStart", "log__generator_8h.html#acd4d4a36ce9e971d2007444728f390b4", null ],
+    [ "LG_WriteMessageStart", "log__generator_8h.html#a42705ffc5dc4e9ab4024d8697cda4723", null ],
+    [ "LG_COLOR_BLACK", "group___l_g___c_o_l_o_r_s.html#ga861cebecda10d5a2bad1f8119db4af92", null ],
+    [ "LG_COLOR_BLUE", "group___l_g___c_o_l_o_r_s.html#ga06411891a1d3d2e4151b3835ae103150", null ],
+    [ "LG_COLOR_GRAY", "group___l_g___c_o_l_o_r_s.html#gaa20ebf729f44cf38718c87b8b33b13b9", null ],
+    [ "LG_COLOR_GREEN", "group___l_g___c_o_l_o_r_s.html#ga9bbd4e81a3f3f5e755e5d03d437cc322", null ],
+    [ "LG_COLOR_PINK", "group___l_g___c_o_l_o_r_s.html#ga0870c277fe4cb7f6aa55a02a68f3abb5", null ],
+    [ "LG_COLOR_RED", "group___l_g___c_o_l_o_r_s.html#ga9611975f9e6e76e90fd6e285b3077308", null ],
+    [ "LG_COLOR_YELLOW", "group___l_g___c_o_l_o_r_s.html#ga2fe43d94b930e6bf84b69699e9f9db74", null ],
+    [ "LG_FILE_NAME", "log__generator_8h.html#a00620ed5526cc09b950e4c1a3b0f381b", null ],
+    [ "LG_STLE_NAME", "log__generator_8h.html#a5e6893a99d4bf07fe715c8c648db4098", null ],
+    [ "LG_STYLE_CLASS_DEFAULT", "group___l_g___c_l_a_s_s_e_s.html#ga2422f86bf43bf9e5fd66b26a3718b3a9", null ],
+    [ "LG_STYLE_CLASS_ERROR", "group___l_g___c_l_a_s_s_e_s.html#ga7d048e5eca8509bc9d93ac43c8f0f030", null ],
+    [ "LG_STYLE_CLASS_GOOD", "group___l_g___c_l_a_s_s_e_s.html#ga2ec4cc543858801891be59d0943d1096", null ]
+];

@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['logmessage_30',['logMessage',['../log__generator_8cpp.html#a6254982d39e2485fd7ec037cb5d140a3',1,'logMessage(const char *message, const char *color,...):&#160;log_generator.cpp'],['../log__generator_8h.html#a6254982d39e2485fd7ec037cb5d140a3',1,'logMessage(const char *message, const char *color,...):&#160;log_generator.cpp']]],
+  ['logwrite_31',['logWrite',['../log__generator_8cpp.html#a6be1d68db3d7d21f664a16c527a60d1c',1,'logWrite(const char *string,...):&#160;log_generator.cpp'],['../log__generator_8cpp.html#a6af5972de491714691667a8f35688de6',1,'logWrite(const char *string, const char *color,...):&#160;log_generator.cpp'],['../log__generator_8h.html#a6af5972de491714691667a8f35688de6',1,'logWrite(const char *string, const char *color,...):&#160;log_generator.cpp'],['../log__generator_8h.html#a6be1d68db3d7d21f664a16c527a60d1c',1,'logWrite(const char *string,...):&#160;log_generator.cpp']]],
+  ['logwritemessageend_32',['logWriteMessageEnd',['../log__generator_8cpp.html#adc09925a7faf9bffd5e57fdd228e98a7',1,'logWriteMessageEnd():&#160;log_generator.cpp'],['../log__generator_8h.html#adc09925a7faf9bffd5e57fdd228e98a7',1,'logWriteMessageEnd():&#160;log_generator.cpp']]],
+  ['logwritemessagestart_33',['logWriteMessageStart',['../log__generator_8cpp.html#a0c1b04998392137205d3320cf22c74e0',1,'logWriteMessageStart(const char *color):&#160;log_generator.cpp'],['../log__generator_8h.html#a0c1b04998392137205d3320cf22c74e0',1,'logWriteMessageStart(const char *color):&#160;log_generator.cpp']]]
+];

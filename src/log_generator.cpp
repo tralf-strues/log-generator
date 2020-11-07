@@ -4,28 +4,10 @@
 #include <math.h>
 #include "log_generator.h"
 
-FILE* logFile     = NULL;
-bool  initialized = false;
+FILE* LG_logFile     = NULL;
+bool  LG_initialized = false;
 
-//-----------------------------------------------------------------------------
-//! Chacks whether or not color has a supporting color name.
-//!
-//! @param [in]  color  
-//!
-//! @return whether or not color is valid.
-//-----------------------------------------------------------------------------
-bool isValidColor(const char* color)
-{
-    assert(color != NULL);
-
-    return strcmp(color, LOG_COLOR_BLACK)  == 0 ||
-           strcmp(color, LOG_COLOR_BLUE)   == 0 ||
-           strcmp(color, LOG_COLOR_GRAY)   == 0 ||
-           strcmp(color, LOG_COLOR_GREEN)  == 0 ||
-           strcmp(color, LOG_COLOR_PINK)   == 0 ||
-           strcmp(color, LOG_COLOR_RED)    == 0 ||
-           strcmp(color, LOG_COLOR_YELLOW) == 0;
-}
+void LG_Write(const char* format, va_list args);
 
 //-----------------------------------------------------------------------------
 //! Initializes the log - opens the log file and writes the header.
@@ -33,18 +15,17 @@ bool isValidColor(const char* color)
 //! @return whether or not initialization has been successful. Returns false if
 //!         log has already been initialized.
 //-----------------------------------------------------------------------------
-bool initLog()
+bool LG_Init()
 {
-    if (initialized)
-        return false;
+    if (LG_IsInitialized()) { return false; }
 
-    logFile = fopen(LOG_FILE_NAME, "w");
-    if (logFile == NULL)
-        return false;
+    LG_logFile = fopen(LG_FILE_NAME, "w");
+    if (LG_logFile == NULL) { return false; }
 
-    fprintf(logFile, "<!DOCTYPE html>\n<html>\n<body>\n");
+    LG_initialized = true;
 
-    initialized = true;
+    LG_Write("<!DOCTYPE html>\n<html>\n<head><link rel=\"stylesheet\" href=\"%s\"></head>\n<body>\n", LG_STLE_NAME);
+
     return true;
 }
 
@@ -54,149 +35,235 @@ bool initLog()
 //! @return whether or not closing has been successful. Returns false if
 //!         log hasn't been initialized yet.
 //-----------------------------------------------------------------------------
-bool closeLog()
+bool LG_Close()
 {
-    if (!initialized)
-        return false;
+    if (!LG_IsInitialized()) { return false; }
 
-    fprintf(logFile, "\n</body>\n</html>");
+    LG_Write("\n</body>\n</html>");
 
-    if (fclose(logFile) == EOF)
-        return false;
+    if (fclose(LG_logFile) == EOF) { return false; }
 
-    initialized = false;
+    LG_initialized = false;
     return true;
 }
 
 //-----------------------------------------------------------------------------
 //! @return whether or not log has been initialized.
 //-----------------------------------------------------------------------------
-bool isLogInitialized()
+bool LG_IsInitialized()
 {
-    return initialized;
+    return LG_initialized;
+}
+
+//-----------------------------------------------------------------------------
+//! Logs image.
+//!
+//! @param [in] fileName file name of the image with extension (.png/.jpg/etc)
+//!
+//! @note image should be in the same folder as the log.html file (by default 
+//!       log/) to be shown correctly.
+//-----------------------------------------------------------------------------
+void LG_AddImage(const char* fileName)
+{
+    assert(fileName != NULL);
+
+    if (!LG_IsInitialized()) { return; }
+
+    LG_Write("<img src=\"%s\" alt=\"No image\">", fileName);
 }
 
 //-----------------------------------------------------------------------------
 //! Logs message as one paragraph.
 //!
-//! @param [in]  message
-//! @param [in]  color   color of the entire message to be logged
-//! @param [in]  ...
-//!
+//! @param [in] format
+//! @param [in] styleClass specifies view of the message 
+//!             (see @ref LG_STYLE_CLASSES).
+//! @param [in] ...
+//! 
+//! @warning Logs nothing if log hasn't been initialized.
 //-----------------------------------------------------------------------------
-void logMessage(const char* message, const char* color, ...)
+void LG_LogMessage(const char* format, LG_StyleClass styleClass, ...)
 {
-    assert(message != NULL);
-    assert(color   != NULL);
+    assert(format          != NULL);
+    assert(styleClass.name != NULL);
 
-    if (!initialized)
-        return;
+    if (!LG_IsInitialized()) { return; }
 
-    va_list valist;
-    va_start(valist, color);
+    va_list args;
+    va_start(args, styleClass);
 
-    logWriteMessageStart(color);
-    vfprintf(logFile, message, valist);
-    logWriteMessageEnd();
+    LG_WriteMessageStart(styleClass);
+    LG_Write(format, args);
+    LG_WriteMessageEnd();
 
-    va_end(valist);
+    va_end(args);
+}
+
+//-----------------------------------------------------------------------------
+//! Logs message as one paragraph.
+//!
+//! @param [in] format
+//! @param [in] color color of the entire message to be logged 
+//!             (see @ref LG_COLORS).
+//! @param [in] ...
+//! 
+//! @warning Logs nothing if log hasn't been initialized.
+//-----------------------------------------------------------------------------
+void LG_LogMessage(const char* format, LG_Color color, ...)
+{
+    assert(format != NULL);
+
+    if (!LG_IsInitialized()) { return; }
+
+    va_list args;
+    va_start(args, color);
+
+    LG_WriteMessageStart(color);
+    LG_Write(format, args);
+    LG_WriteMessageEnd();
+
+    va_end(args);
+}
+
+//-----------------------------------------------------------------------------
+//! Starts a new paragraph inside which to write next.
+//! 
+//! @param [in] styleClass style of the entire paragraph, though can be changed 
+//!             for individual paragraph parts by calling LG_Write with 
+//!             specified style class (see @ref LG_STYLE_CLASSES).
+//!
+//! @warning Supposed to be followed by a sequence of LG_Write calls and then 
+//!          by LG_WriteMessageEnd.
+//! @warning Logs nothing if log hasn't been initialized.
+//-----------------------------------------------------------------------------
+void LG_WriteMessageStart(LG_StyleClass styleClass)
+{
+    if (!LG_IsInitialized()) { return; }
+
+    LG_Write("\n<pre class=\"%s\">\n", styleClass.name);
+}
+
+//-----------------------------------------------------------------------------
+//! Starts a new paragraph inside which to write next.
+//! 
+//! @param [in] color color of the entire paragraph, though can be changed for
+//!             individual paragraph parts by calling LG_Write with specified 
+//!             color (see @ref LG_COLORS).
+//!
+//! @warning Supposed to be followed by a sequence of LG_Write calls and then 
+//!          by LG_WriteMessageEnd.
+//! @warning Logs nothing if log hasn't been initialized.
+//-----------------------------------------------------------------------------
+void LG_WriteMessageStart(LG_Color color)
+{
+    if (!LG_IsInitialized()) { return; }
+
+    LG_Write("\n<pre style=\"color: rgb(%u, %u, %u);\">\n", color.r, color.g, color.b);
+}
+
+//-----------------------------------------------------------------------------
+//! Ends the current paragraph. 
+//!
+//! @warning Supposed to be called after LG_WriteMessageStart and some 
+//!          sequence of LG_Write calls.
+//! @warning Logs nothing if log hasn't been initialized.
+//-----------------------------------------------------------------------------
+void LG_WriteMessageEnd()
+{
+    if (!LG_IsInitialized()) { return; }
+
+    LG_Write("\n</pre>\n");
+}
+
+//-----------------------------------------------------------------------------
+//! Logs string as a continuation of what has been logged already. 
+//!
+//! @param [in] format
+//! @param [in] styleClass style class of the entire string to be logged 
+//!             (see @ref LG_STYLE_CLASSES).
+//! @param [in] ...
+//!
+//! @warning Logs nothing if log hasn't been initialized.
+//-----------------------------------------------------------------------------
+void LG_Write(const char* format, LG_StyleClass styleClass, ...)
+{
+    assert(format          != NULL);
+    assert(styleClass.name != NULL);
+
+    if (!LG_IsInitialized()) { return; }
+
+    va_list args;
+    va_start(args, styleClass);
+
+    LG_Write("<span class=\"%s\">", styleClass.name);
+    LG_Write(format, args);
+    LG_Write("</span>");
+
+    va_end(args);
+}
+
+//-----------------------------------------------------------------------------
+//! Logs string as a continuation of what has been logged already. 
+//!
+//! @param [in] format
+//! @param [in] color color of the entire string to be logged 
+//!             (see @ref LG_COLORS).
+//! @param [in] ...
+//!
+//! @warning Logs nothing if log hasn't been initialized.
+//-----------------------------------------------------------------------------
+void LG_Write(const char* format, LG_Color color, ...)
+{
+    assert(format != NULL);
+
+    if (!LG_IsInitialized()) { return; }
+
+    va_list args;
+    va_start(args, color);
+
+    LG_Write("<span style=\"color: rgb(%u, %u, %u);\">", color.r, color.g, color.b);
+    LG_Write(format, args);
+    LG_Write("</span>");
+
+    va_end(args);
 }
 
 //-----------------------------------------------------------------------------
 //! Logs string as a continuation of what has been logged already. Default 
 //! color is black.
 //!
-//! @param [in]  string
-//! @param [in]  ...
+//! @param [in] format
+//! @param [in] ...
+//!
+//! @warning Logs nothing if log hasn't been initialized.
 //-----------------------------------------------------------------------------
-void logWrite(const char* string, ...)
+void LG_Write(const char* format, ...)
 {
-    assert(string != NULL);
+    assert(format != NULL);
 
-    if (!initialized)
-        return;
+    if (!LG_IsInitialized()) { return; }
 
-    va_list valist;
-    va_start(valist, string);
+    va_list args;
+    va_start(args, format);
 
-    vfprintf(logFile, string, valist);
-
-    va_end(valist);
+    LG_Write(format, args);
+    
+    va_end(args);
 }
 
 //-----------------------------------------------------------------------------
-//! Logs string as a continuation of what has been logged already. 
+//! Logs string as a continuation of what has been logged already.
 //!
-//! @param [in]  string
-//! @param [in]  color   color of the entire string to be logged
-//! @param [in]  ...
-//-----------------------------------------------------------------------------
-void logWrite(const char* string, const char* color, ...)
-{
-    assert(string != NULL);
-    assert(color  != NULL);
-
-    if (!initialized)
-        return;
-
-    va_list valist;
-    va_start(valist, color);
-
-    if (!isValidColor(color))
-        color = LOG_COLOR_BLACK;
-
-    fprintf (logFile, "<span style=\"color:%s;\">", color);
-    vfprintf(logFile, string, valist);
-    fprintf (logFile, "</span>");
-
-    va_end(valist);
-}
-
-//-----------------------------------------------------------------------------
-//! Starts a new paragraph inside which to write next. Supposed to be followed 
-//! by a sequence of logWrite calls and then by logWriteMessageEnd.
+//! @param [in] format
+//! @param [in] ...
 //!
-//! @param [in]  color color of the entire paragraph, though can be changed for
-//!                    individual paragraph parts by calling logWrite with
-//!                    specified color.
+//! @warning Logs nothing if log hasn't been initialized.
 //-----------------------------------------------------------------------------
-void logWriteMessageStart(const char* color)
+void LG_Write(const char* format, va_list args)
 {
-    if (!initialized)
-        return;
+    assert(format != NULL);
 
-    if (!isValidColor(color))
-        color = LOG_COLOR_BLACK;
+    if (!LG_IsInitialized()) { return; }
 
-    fprintf (logFile, "\n<pre style=\"color:%s;\">\n", color);
-}
-
-//-----------------------------------------------------------------------------
-//! Ends the current paragraph. Supposed to be called after 
-//! logWriteMessageStart and some sequence of logWrite calls.
-//-----------------------------------------------------------------------------
-void logWriteMessageEnd()
-{
-    if (!initialized)
-        return;
-
-    fprintf (logFile, "\n</pre>\n");
-}
-
-//-----------------------------------------------------------------------------
-//! Converts int to string. 
-//!
-//! @param [in]  value   value to be converted
-//! @param [out] str     string to which to write result
-//!
-//! @return str or NULL on failure.
-//-----------------------------------------------------------------------------
-char* intToStr (int value, char* str)
-{
-    if (str == NULL)
-        return NULL;
-
-    sprintf(str, "%d", value);
-
-    return str;
+    vfprintf(LG_logFile, format, args);
 }
