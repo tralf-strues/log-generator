@@ -32,7 +32,7 @@ static const LG_Color LG_COLOR_YELLOW = { 0xFF, 0xFF, 0x00 };
 //! @defgroup LG_STYLE_CLASSES Style specifying classes
 //! @attention There has to be log.css in log/ folder in order for the style 
 //!            classes to work properly!
-//! @addtogroup LG_CLASSES
+//! @addtogroup LG_STYLE_CLASSES
 //! @{
 
 struct LG_StyleClass
@@ -56,14 +56,14 @@ bool LG_Init              ();
 bool LG_Close             ();
 bool LG_IsInitialized     ();
 
-void LG_AddImage          (const char*   fileName);
+void LG_AddImage          (const char* fileName, const char* htmlStyle);
 
-void LG_LogMessage        (const char*   format, LG_StyleClass styleClass, ...);
-void LG_LogMessage        (const char*   format, LG_Color      color,      ...);
+void LG_LogMessage        (const char* format, LG_StyleClass styleClass, ...);
+void LG_LogMessage        (const char* format, LG_Color color, ...);
 void LG_WriteMessageStart (LG_StyleClass styleClass);
-void LG_WriteMessageStart (LG_Color      color);
+void LG_WriteMessageStart (LG_Color color);
 void LG_WriteMessageEnd   ();
 
-void LG_Write             (const char*   format, LG_StyleClass styleClass, ...);
-void LG_Write             (const char*   format, LG_Color      color,      ...);
-void LG_Write             (const char*   format, ...);
+void LG_Write             (const char* format, LG_StyleClass styleClass, ...);
+void LG_Write             (const char* format, LG_Color color, ...);
+void LG_Write             (const char* format, ...);

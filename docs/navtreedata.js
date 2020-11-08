@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "log_generator", "index.html", [
+  [ "Log Generator", "index.html", [
     [ "Simple but convenient log generator", "index.html", [
       [ "Example 1 (Hello World)", "index.html#autotoc_md1", null ],
       [ "Example 2 (Adding color)", "index.html#autotoc_md2", null ],

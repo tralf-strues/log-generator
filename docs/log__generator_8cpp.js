@@ -1,6 +1,6 @@
 var log__generator_8cpp =
 [
-    [ "LG_AddImage", "log__generator_8cpp.html#aa2d084e5cbb8e3940289829837d26aa5", null ],
+    [ "LG_AddImage", "log__generator_8cpp.html#aaad0d9a69577fc4d707ce11ac9434004", null ],
     [ "LG_Close", "log__generator_8cpp.html#ab18fe00f5e45b162c4a54015cedc145d", null ],
     [ "LG_Init", "log__generator_8cpp.html#a85d9ea260bf9910f733970920adbc82a", null ],
     [ "LG_IsInitialized", "log__generator_8cpp.html#afeef7acc563ce45fc8b5c3a13705829c", null ],

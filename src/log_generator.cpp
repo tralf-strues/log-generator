@@ -58,18 +58,22 @@ bool LG_IsInitialized()
 //-----------------------------------------------------------------------------
 //! Logs image.
 //!
-//! @param [in] fileName file name of the image with extension (.png/.jpg/etc)
+//! @param [in] fileName file name of the image with extension 
+//!                      (e.g. .png/.jpg/etc)
+//! @param [in] htmlStyle style of the image (e.g. "width:auto; height:auto"). 
+//!                       If htmlStyle is NULL then no img style will be added
 //!
 //! @note image should be in the same folder as the log.html file (by default 
 //!       log/) to be shown correctly.
 //-----------------------------------------------------------------------------
-void LG_AddImage(const char* fileName)
+void LG_AddImage(const char* fileName, const char* htmlStyle)
 {
     assert(fileName != NULL);
 
     if (!LG_IsInitialized()) { return; }
 
-    LG_Write("<img src=\"%s\" alt=\"No image\">", fileName);
+    if (htmlStyle == NULL) { LG_Write("<img src=\"%s\" alt=\"No image\">", fileName); }
+    else                   { LG_Write("<img style=\"%s\" src=\"%s\" alt=\"No image\">", htmlStyle, fileName); }
 }
 
 //-----------------------------------------------------------------------------

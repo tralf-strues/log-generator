@@ -1,6 +1,6 @@
 var log__generator_8h =
 [
-    [ "LG_AddImage", "log__generator_8h.html#aa2d084e5cbb8e3940289829837d26aa5", null ],
+    [ "LG_AddImage", "log__generator_8h.html#aaad0d9a69577fc4d707ce11ac9434004", null ],
     [ "LG_Close", "log__generator_8h.html#ab18fe00f5e45b162c4a54015cedc145d", null ],
     [ "LG_Init", "log__generator_8h.html#a85d9ea260bf9910f733970920adbc82a", null ],
     [ "LG_IsInitialized", "log__generator_8h.html#afeef7acc563ce45fc8b5c3a13705829c", null ],
@@ -21,7 +21,7 @@ var log__generator_8h =
     [ "LG_COLOR_YELLOW", "group___l_g___c_o_l_o_r_s.html#ga2fe43d94b930e6bf84b69699e9f9db74", null ],
     [ "LG_FILE_NAME", "log__generator_8h.html#a00620ed5526cc09b950e4c1a3b0f381b", null ],
     [ "LG_STLE_NAME", "log__generator_8h.html#a5e6893a99d4bf07fe715c8c648db4098", null ],
-    [ "LG_STYLE_CLASS_DEFAULT", "group___l_g___c_l_a_s_s_e_s.html#ga2422f86bf43bf9e5fd66b26a3718b3a9", null ],
-    [ "LG_STYLE_CLASS_ERROR", "group___l_g___c_l_a_s_s_e_s.html#ga7d048e5eca8509bc9d93ac43c8f0f030", null ],
-    [ "LG_STYLE_CLASS_GOOD", "group___l_g___c_l_a_s_s_e_s.html#ga2ec4cc543858801891be59d0943d1096", null ]
+    [ "LG_STYLE_CLASS_DEFAULT", "group___l_g___s_t_y_l_e___c_l_a_s_s_e_s.html#ga2422f86bf43bf9e5fd66b26a3718b3a9", null ],
+    [ "LG_STYLE_CLASS_ERROR", "group___l_g___s_t_y_l_e___c_l_a_s_s_e_s.html#ga7d048e5eca8509bc9d93ac43c8f0f030", null ],
+    [ "LG_STYLE_CLASS_GOOD", "group___l_g___s_t_y_l_e___c_l_a_s_s_e_s.html#ga2ec4cc543858801891be59d0943d1096", null ]
 ];
