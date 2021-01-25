@@ -1,6 +1,6 @@
 # Simple but convenient log generator
 
-This is a simple html log generator. See *examples* below to better understand how it works or [*documentation*](https://tralf-strues.github.io/log_generator/) where you can find out what each function **does**.
+This is a simple html log generator. See examples below to better understand how it works or [documentation](https://tralf-strues.github.io/log_generator/) where you can find out what each function does.
 
 ## Example 1 (Hello World)
 
@@ -33,7 +33,7 @@ Hello, World!
 
 *How log.css could be used you can find in example 3.*
 
-## Example 2 (Adding color)
+## Example 2 (Adding color :art:)
 
 ```c++
 #include "log_generator.h"
@@ -61,7 +61,7 @@ int main()
 		// starts an error message with red color
 		LG_WriteMessageStart(LG_COLOR_RED);
 		
-		LG_Write("An ERROR occured!\n");
+		LG_Write("An ERROR occurred!\n");
 		
 		// works similar to printf(...)
 		LG_Write("Error code is %d\n", status); 
@@ -85,7 +85,7 @@ This code will produce the following log.html file:
 <body>
 
 <pre style="color: rgb(255, 0, 0);">
-An ERROR occured!
+An ERROR occurred!
 Error code is 2
 
 </pre>
@@ -124,7 +124,7 @@ int main()
 		// starts an error message with error style class
 		LG_WriteMessageStart(LG_STYLE_CLASS_ERROR);
 		
-		LG_Write("An ERROR occured!\n");
+		LG_Write("An ERROR occurred!\n");
 		LG_Write("Error code is %d\n", status); 
 		
 		LG_WriteMessageEnd();
@@ -145,7 +145,7 @@ This code will produce the following log.html file:
 <body>
 
 <pre class="LG_ERROR">
-An ERROR occured!
+An ERROR occurred!
 Error code is 2
 
 </pre>
